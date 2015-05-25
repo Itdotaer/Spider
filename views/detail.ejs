@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%if(error){%>
+    	<p style="color: red;">Error: <%= error %></p>
+    <%}%>
+    <div class="panel panel-primary">
+        <div class="panel-heading text-center">
+            <h1><%= post.title %></h1>
+            <label>Source:<%= post.mediaSource %></label>
+            <label>Published Time: <%= post.publishedTime %></label>
+        </div>
+        <div class="panel-body">
+            <%= post.content %>
+        </div>
+    </div>
+  </body>
+</html>
