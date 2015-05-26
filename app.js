@@ -5,9 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose   = require('mongoose');
+var later = require('later');
 
 var routes = require('./routes/index');
 var spider = require('./routes/spider');
+var spiderService = require('./core/spider');
 
 var app = express();
 // connect to Mongo when the app initializes
@@ -27,6 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/spider', spider);
+
+//Later schedule
+ var sched = later.parse.recur().every(5).minute(),
+      t = later.setInterval(spiderService.spider, sched);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

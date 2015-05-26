@@ -12,7 +12,7 @@ sinaSpiderForContent = function(url){
 	var req = request(options);
 
 	req.on('error', function(err){
-		return callback(err);	
+		console.log('Error:', err);	
 	});
 	req.on('response', function(response){
 		var bufferHelper = new BufferHelper();
@@ -105,7 +105,7 @@ netEasySpiderForContent = function(url){
 	var req = request(options);
 
 	req.on('error', function(err){
-		return callback(err);	
+		console.log('Error:', err);	
 	});
 	req.on('response', function(response){
 		var bufferHelper = new BufferHelper();
@@ -191,9 +191,16 @@ netEasySpiderForIndex = function(url){
 };
 
 exports.sinaSpider = function(){
-	return sinaSpiderForIndex(config.SPIDER_ADDRESS.SINA);
+	sinaSpiderForIndex(config.SPIDER_ADDRESS.SINA);
 }
 
 exports.netEasySpider = function(){
-	return netEasySpiderForIndex(config.SPIDER_ADDRESS.NETEASY);
+	netEasySpiderForIndex(config.SPIDER_ADDRESS.NETEASY);
+}
+
+exports.spider = function(){
+	console.log('=============Begin==============');
+	sinaSpiderForIndex(config.SPIDER_ADDRESS.SINA);
+	netEasySpiderForIndex(config.SPIDER_ADDRESS.NETEASY);
+	console.log('=============End==============');
 }

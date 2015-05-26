@@ -3,6 +3,10 @@ var router = express.Router();
 var spider = require('../core/spider');
 var Post = require('../models/post');
 
+router.get('/all', function(req, res, next){
+	spider.spider();
+});
+
 //For sina
 router.get('/sina', function(req, res, next) {
 	spider.sinaSpider();
