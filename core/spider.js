@@ -39,6 +39,13 @@ sinaSpiderForContent = function(url){
 				sourceUrl: url,
 				spider: 'sina'
 			};
+
+			if(cbData.publishedTime === ''){
+				cbData.publishedTime = $('pub_date').text().trim();
+			}
+			if(cbData.mediaSource === ''){
+				cbData.mediaSource = $('#author_ename a').text().trim();
+			}
 			
 			//Save
 			if(cbData.title === '' || cbData.content === ''){
@@ -126,12 +133,20 @@ netEasySpiderForContent = function(url){
 
 			var cbData = {
 				title: $title.text().trim() ? $title.text().trim() : '',
-				publishedTime: $time_source.text().trim().substring(0, $time_source.text().trim().search(' ')),
+				publishedTime: $time_source.text().trim().substring(0, $time_source.text().trim().search('来')),
 				mediaSource: $media_source.text().trim(),
 				content: $content.text().trim(),
 				sourceUrl: url,
 				spider: '163'
 			};
+
+			if(cbData.publishedTime === ''){
+				cbData.publishedTime = $('div.ep-info .left').text().trim().substring(0, $('div.ep-info .left').text().trim().search('来'));
+			}
+
+			if(cbData.mediaSource === ''){
+				cbData.mediaSource = $('div.ep-info .left:first-child').text().trim();
+			}
 			
 			if(cbData.title === '' || cbData.content === ''){
 				//Nothing
